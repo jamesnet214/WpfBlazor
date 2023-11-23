@@ -1,0 +1,21 @@
+@inject SharedService _sharedService
+
+<h1>Counter!!</h1>
+
+<input @bind="_sharedService.Data" @bind:event="oninput"/>
+
+<div>@_sharedService.Data</div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        _sharedService.OnDataChanged += _sharedService_OnDataChanged;
+    }
+
+    private void _sharedService_OnDataChanged()
+    {
+        StateHasChanged();    
+    }
+}
